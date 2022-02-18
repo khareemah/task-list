@@ -15,11 +15,14 @@ const App = () => {
 
   useEffect(() => {
     taskEl.current.focus();
-    const list =
-      JSON.parse(localStorage.getItem('list')).length === 0
-        ? []
-        : JSON.parse(localStorage.getItem('list'));
+    const list = JSON.parse(localStorage.getItem('list'))
+      ? JSON.parse(localStorage.getItem('list'))
+      : [];
     setList(list);
+
+    // JSON.parse(localStorage.getItem('list'))
+    //   ? setList(JSON.parse(localStorage.getItem('list')))
+    //   : setList([]);
   }, []);
 
   useEffect(() => {
