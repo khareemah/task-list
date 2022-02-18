@@ -12,9 +12,9 @@ const App = () => {
     type: '',
     show: false,
   });
-<<<<<<< HEAD
 
   useEffect(() => {
+    taskEl.current.focus();
     const list =
       JSON.parse(localStorage.getItem('list')).length === 0
         ? []
@@ -23,15 +23,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    taskEl.current.focus();
-  });
+    localStorage.setItem('list', JSON.stringify(list));
+  }, [list]);
 
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(list));
   }, [list]);
 
-=======
->>>>>>> 3d9038ff88046fc48d544b7e2f7b3810c3483dd4
   const handleSubmit = (e) => {
     e.preventDefault();
     if (task && edit) {
@@ -58,8 +56,6 @@ const App = () => {
 
     showAlert('text field is empty', 'danger', true);
   };
-<<<<<<< HEAD
-
   const showAlert = (message = '', type = '', show = false) => {
     return setAlert({ message, type, show });
   };
@@ -73,6 +69,7 @@ const App = () => {
       return task;
     });
     setList(newList);
+    console.log(newList);
     e.target.parentElement.firstChild.classList.add('strikethrough');
     showAlert('task has been completed', 'success', true);
   };
@@ -91,31 +88,6 @@ const App = () => {
   const deleteTask = (id) => {
     setList((oldList) => {
       const newList = oldList.filter((task) => task.id !== id);
-=======
-  const showAlert = (message = '', type = '', show = false) => {
-    return setAlert({ message, type, show });
-  };
-  useEffect(() => {
-    taskEl.current.focus();
-    const list =
-      JSON.parse(localStorage.getItem('list')).length === 0
-        ? []
-        : JSON.parse(localStorage.getItem('list'));
-    setList(list);
-  }, []);
-  useEffect(() => {
-    localStorage.setItem('list', JSON.stringify(list));
-  }, [list]);
-
-  const completeTask = (e) => {
-    e.preventDefault();
-    e.target.parentElement.firstChild.classList.add('strikethrough');
-    showAlert('task has been completed', 'success', true);
-  };
-  const deleteTask = (id) => {
-    setList((oldList) => {
-      const newList = list.filter((task) => task.id !== id);
->>>>>>> 3d9038ff88046fc48d544b7e2f7b3810c3483dd4
       return newList;
     });
     showAlert('task has been removed', 'success', true);
@@ -154,7 +126,6 @@ const App = () => {
       </article>
       {list.length > 0 && (
         <>
-<<<<<<< HEAD
           {list.map((task) => {
             const { title, id, tag } = task;
             return (
@@ -170,15 +141,6 @@ const App = () => {
                 <button onClick={(e) => incompleteTask(e, id)}>
                   incomplete
                 </button>
-=======
-          {list.map(({ title, id }) => {
-            return (
-              <div className="item" key={id}>
-                <h4>{title}</h4>
-                <button onClick={() => editTask(id)}>edit</button>
-                <button onClick={() => deleteTask(id)}>delete</button>
-                <button onClick={completeTask}>complete</button>
->>>>>>> 3d9038ff88046fc48d544b7e2f7b3810c3483dd4
               </div>
             );
           })}
